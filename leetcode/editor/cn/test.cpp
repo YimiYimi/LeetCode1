@@ -1,31 +1,40 @@
 //
 // Created by USER on 2021/4/19.
 //
-#include<iostream>
-#include<string>
-#include<algorithm>
+#include<vector>
+#include <iostream>
+#include<stack>
 using namespace std;
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
 class Solution {
 public:
-    string addBinary(string a, string b) {
-        int bit = 0, len;
-        string r;
-        len = max(a.length(), b.length());
-        for(int i = 0; i < len; i++){
-            bit += (i < a.length()) ? (a.at(a.length() - i - 1) - '0') : 0;
-            bit += (i < b.length()) ? (b.at(b.length() - i - 1) - '0') : 0;
-            r.insert(0, 1, char(bit%2 + (int)'0'));
-//            r = (char)(bit%2 + (int)'0') + r;
-            bit /= 2;
+    vector<int> reversePrint(ListNode* head) {
+        stack<int> s;
+        vector<int> re;
+        while(head != NULL){
+            s.push(head->val);
+            head = head->next;
         }
-        if(bit){
-            r = '1' + r;
+        while(!s.empty()){
+            re.push_back(s.top());
+            s.pop();
         }
-        return r;
+        return re;
     }
 };
 int main(){
     Solution so;
-    cout << so.addBinary("1010", "1011");
+    ListNode *head;
+    head = new ListNode(1);
+    head->next = new ListNode(3);
+    head->next->next = new ListNode(2);
+
+    vector<int>re = so.reversePrint(head);
+    for(int r:re)   cout << r;
 }
 

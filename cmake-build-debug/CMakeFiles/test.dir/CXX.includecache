@@ -7,10 +7,10 @@
 #IncludeRegexTransform: 
 
 E:/USTC/ACM/LeetCode1/leetcode/editor/cn/test.cpp
+vector
+-
 iostream
 -
-string
--
-algorithm
+stack
 -
 
