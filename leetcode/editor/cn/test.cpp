@@ -3,38 +3,29 @@
 //
 #include<vector>
 #include <iostream>
-#include<stack>
-using namespace std;
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
 
+using namespace std;
 class Solution {
 public:
-    vector<int> reversePrint(ListNode* head) {
-        stack<int> s;
-        vector<int> re;
-        while(head != NULL){
-            s.push(head->val);
-            head = head->next;
+    string replaceSpace(string s) {
+        int len = s.length();
+        for(int i = 0; i < len; i++){
+            if(' ' == s[i]){
+                s += "  ";  //加两个空格，算上当前空格刚好3个位置放下%20
+            }
         }
-        while(!s.empty()){
-            re.push_back(s.top());
-            s.pop();
+        for(int j = s.length() - 1, i = len - 1; j >= 0 && i >= 0; i--){
+            if(' ' == s[i]){
+                s[j--] = '0';
+                s[j--] = '2';
+                s[j--] = '%';
+            }else   s[j--] = s[i];
         }
-        return re;
+        return s;
     }
 };
 int main(){
     Solution so;
-    ListNode *head;
-    head = new ListNode(1);
-    head->next = new ListNode(3);
-    head->next->next = new ListNode(2);
-
-    vector<int>re = so.reversePrint(head);
-    for(int r:re)   cout << r;
+    cout << so.replaceSpace("We are happy.");
 }
 
