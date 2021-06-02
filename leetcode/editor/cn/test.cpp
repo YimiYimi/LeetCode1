@@ -7,25 +7,24 @@
 using namespace std;
 class Solution {
 public:
-    string replaceSpace(string s) {
-        int len = s.length();
-        for(int i = 0; i < len; i++){
-            if(' ' == s[i]){
-                s += "  ";  //加两个空格，算上当前空格刚好3个位置放下%20
+    int minArray(vector<int>& numbers) {
+        int l = 0, r = numbers.size()-1, m;
+        while(l < r){
+            m = (l + r) / 2;
+            if(numbers[m] < numbers[r]){
+                r = m;
+            }else if(numbers[m] > numbers[r]){
+                l = m + 1;
+            }else{
+                r--;
             }
         }
-        for(int j = s.length() - 1, i = len - 1; j >= 0 && i >= 0; i--){
-            if(' ' == s[i]){
-                s[j--] = '0';
-                s[j--] = '2';
-                s[j--] = '%';
-            }else   s[j--] = s[i];
-        }
-        return s;
+        return numbers[l];
     }
 };
 int main(){
     Solution so;
-    cout << so.replaceSpace("We are happy.");
+    vector<int> numbers = {10,10,10,10,10,1,10};
+    cout << so.minArray(numbers);
 }
 
