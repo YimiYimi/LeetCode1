@@ -7,24 +7,32 @@
 using namespace std;
 class Solution {
 public:
-    int minArray(vector<int>& numbers) {
-        int l = 0, r = numbers.size()-1, m;
-        while(l < r){
-            m = (l + r) / 2;
-            if(numbers[m] < numbers[r]){
-                r = m;
-            }else if(numbers[m] > numbers[r]){
-                l = m + 1;
-            }else{
-                r--;
+    int movingCount(int m, int n, int k) {
+        vector<vector<int> > map(m, vector<int>(n, 0));
+        int num = 0, step, iStep, jStep;
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                step = 0;
+                iStep = i;
+                jStep = j;
+                while(iStep > 0 || jStep > 0){
+                    step += iStep%10;
+                    iStep /= 10;
+                    step += jStep%10;
+                    jStep /= 10;
+                }
+                if(step <= k){
+                    num++;
+                    map[i][j] = 1;
+                }
             }
         }
-        return numbers[l];
+        return num;
     }
 };
 int main(){
     Solution so;
     vector<int> numbers = {10,10,10,10,10,1,10};
-    cout << so.minArray(numbers);
+    cout << so.movingCount(16,8,4);
 }
 
