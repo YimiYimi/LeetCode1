@@ -4,32 +4,48 @@
 #include<vector>
 #include <iostream>
 #include <valarray>
-
+#include<stack>
+#include<set>
+#include<map>
+#include<queue>
 using namespace std;
+
+//Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    TreeNode(int x, TreeNode *l, TreeNode *r) : val(x), left(l), right(r) {}
+};
+
 class Solution {
+private:
+    vector<int> res;
+    queue<TreeNode*> que;
 public:
-    vector<int> printNumbers(int n) {
-        int num = pow(10, n);
-        vector<int> re;
-        for(int i = 1; i < num; i++){
-            re.push_back(i);
+    vector<int> levelOrder(TreeNode* root) {
+        if(root){
+            que.push(root);
         }
-        return re;
-    }
-    void printNumbers2(int n) {
-        string s = "0";
-        while(s.size() <= n){
-            cout << s << endl;
-            int i = s.size()-1;
-            while(i >= 0 && s[i] == '9')    s[i--] = '0';
-            if(i < 0)   s = "1" + s;
-            else    s[i] += 1;
+        else    return {};
+        while(!que.empty()){
+            TreeNode *q = que.front();
+            res.push_back(q->val);
+            if(q->left)   que.push(q->left);
+            if(q->right)   que.push(q->right);
+            que.pop();
         }
+        return res;
     }
 };
 int main(){
     Solution so;
-    vector<int> numbers = {10,10,10,10,10,1,10};
-    so.printNumbers2(6);
+    vector<int> res = so.levelOrder(new TreeNode(3,new TreeNode(9,NULL,NULL),
+                                                 new TreeNode(20,new TreeNode(15,NULL,NULL),
+                                                              new TreeNode(7,NULL,NULL))));
+    for(int i:res){
+        cout << i << " " << endl;
+    }
 }
 
