@@ -1,4 +1,4 @@
-//从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。 
+//请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。 
 //
 // 
 //
@@ -16,7 +16,7 @@
 //
 // [
 //  [3],
-//  [9,20],
+//  [20,9],
 //  [15,7]
 //]
 // 
@@ -28,11 +28,8 @@
 // 
 // 节点总数 <= 1000 
 // 
-//
-// 注意：本题与主站 102 题相同：https://leetcode-cn.com/problems/binary-tree-level-order-tra
-//versal/ 
 // Related Topics 树 广度优先搜索 
-// 👍 115 👎 0
+// 👍 102 👎 0
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -51,15 +48,17 @@ public:
         vector<vector<int>> res;
         queue<TreeNode*> que;
         if(root)    que.push(root);
+        vector<int> tmp;
         while(!que.empty()){
-            vector<int> tmp;
+            TreeNode* tree;
             int size = que.size();
-            for(int i = 0; i < size; i++){
-                TreeNode* tree = que.front();
-                tmp.push_back(tree->val);
-                if(tree->left)  que.push(tree->left);
-                if(tree->right)  que.push(tree->right);
+            while(size--){
+                tree = que.front();
                 que.pop();
+                if(res.size()%2)    tmp.insert(tmp.begin(), tree->val);
+                else    tmp.push_back(tree->val);
+                if(tree->left)  que.push(tree->left);
+                if(tree->right) que.push(tree->right);
             }
             res.push_back(tmp);
             tmp.clear();
