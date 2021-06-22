@@ -32,9 +32,18 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+private:
+    static bool compare(const int &a, const int &b){
+        return to_string(a) + to_string(b) < to_string(b) + to_string(a);
+    }
 public:
     string minNumber(vector<int>& nums) {
-
+        string res;
+        sort(nums.begin(), nums.end(), compare);
+        for(int n:nums){
+            res += to_string(n);
+        }
+        return res;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)

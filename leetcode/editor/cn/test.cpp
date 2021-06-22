@@ -38,6 +38,15 @@ public:
 };
 int main(){
     Solution so;
-    cout << so.findNthDigit(1000000000);
+    priority_queue<string> q;
+    q.push("5");
+    q.push("9");
+    q.push("3");
+    q.push("30");
+    q.push("34");
+    while(!q.empty()){
+        cout << q.top() << endl;
+        q.pop();
+    }
 }
 
