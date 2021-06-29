@@ -1,4 +1,4 @@
-ToolSet: w64 6.0 (local)@E:\DownloadSoft\mingw64
+ToolSet: 14.0 (local)@D:\DownloadSoft\VS2015
 Options: 
 
 Options:

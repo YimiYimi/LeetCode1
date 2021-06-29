@@ -9,6 +9,7 @@
 #include<map>
 #include<queue>
 #include <sstream>
+#include <cstring>
 
 using namespace std;
 
@@ -22,31 +23,21 @@ struct TreeNode {
 
 class Solution {
 public:
-    int findNthDigit(int n) {
-        string s;
-        stringstream ss;
-        for(int i = 0; i <= n; i++){
-            string si;
-            ss << i;
-            ss >> si;
-            s += si;
-            ss.clear(); //不可少
-            if(s.size() > n)   break;
+    char firstUniqChar(string s) {
+        char res;
+        res = ' ';
+        map<char, int> m;
+        for(int i = s.length()-1; i >= 0; i--){
+            char c = s[i];
+            if(m.find(c)!=m.end() && res == c) res = ' ';
+            else if(m.find(c)==m.end()) res = c;
+            m[c]++;
         }
-        return s[n]-'0';
+        return res;
     }
 };
 int main(){
     Solution so;
-    priority_queue<string> q;
-    q.push("5");
-    q.push("9");
-    q.push("3");
-    q.push("30");
-    q.push("34");
-    while(!q.empty()){
-        cout << q.top() << endl;
-        q.pop();
-    }
+    cout << so.firstUniqChar("dddccdbba");
 }
 

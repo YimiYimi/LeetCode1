@@ -6,7 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "E:/USTC/ACM/LeetCode1/leetcode/editor/cn/test.cpp" "E:/USTC/ACM/LeetCode1/cmake-build-debug/CMakeFiles/test.dir/leetcode/editor/cn/test.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "MSVC")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

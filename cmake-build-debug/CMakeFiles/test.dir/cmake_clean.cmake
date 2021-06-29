@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test.dir/leetcode/editor/cn/test.cpp.obj"
-  "libtest.dll.a"
   "test.exe"
   "test.exe.manifest"
+  "test.lib"
   "test.pdb"
 )
 
