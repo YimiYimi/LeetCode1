@@ -20,7 +20,28 @@
 class Solution {
 public:
     int reversePairs(vector<int>& nums) {
-
+        return merge(nums, 0, nums.size()-1);
+    }
+    int merge(vector<int>& nums, int l, int r){
+        if(l >= r)  return 0;
+        vector<int> tmp;
+        int i = l, m = l + (r-l)/2, j = m+1, k, res;
+        res = merge(nums, l, m) + merge(nums, m+1, r);
+        for(k = l; k <= r; k++){    //不可以全部nums复制进来，不然会超时
+            tmp.push_back(nums[k]);
+        }
+        k = l;
+        while(i <= m && j <= r){
+            if(tmp[i-l] <= tmp[j-l]){
+                nums[k++] = tmp[(i++)-l];
+            }else{
+                nums[k++] = tmp[(j++)-l];
+                res += m - i + 1;
+            }
+        }
+        while(i <= m)   nums[k++] = tmp[(i++)-l];
+        while(j <= r)   nums[k++] = tmp[(j++)-l];
+        return res;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
